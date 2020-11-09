@@ -26,7 +26,7 @@ nomsRouter
                 res
                     .status(201)
                     .location(`/noms/${nom.id}`)
-                    .json(article)
+                    .json(nom)
             })
             .catch(next)
     });
@@ -38,7 +38,7 @@ nomsRouter
         NomsService.getById(knexInstance, req.params.nom_id)
             .then(nom => {
                 if (!nom) {return res.status(404).json({
-                    error: { message: `Article doesn't exist` }
+                    error: { message: `Nom doesn't exist` }
                 })
             }
             res.json(nom)
