@@ -6,5 +6,8 @@ CREATE TABLE noms (
     sub TEXT NOT NULL,
     url TEXT,
     description TEXT,
-    date_published TIMESTAMPTZ DEFAULT now() NOT NULL
+    author INTEGER
+        REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+    date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
+    updated_on TIMESTAMPTZ DEFAULT now() NOT NULL
 );

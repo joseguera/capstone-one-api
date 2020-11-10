@@ -5,5 +5,5 @@ CREATE TABLE users (
     fullname TEXT NOT NULL,
     username TEXT NOT NULL,
     password TEXT,
-    date_published TIMESTAMPTZ DEFAULT now() NOT NULL
+    date_created TIMESTAMPTZ DEFAULT now() NOT NULL
 );

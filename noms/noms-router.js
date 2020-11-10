@@ -22,7 +22,7 @@ nomsRouter
             req.app.get('db')
         )
             .then(noms => {
-                res.json(noms)
+                res.json(noms.map(serializeNom))
             })
             .catch(next)
     })
@@ -70,7 +70,7 @@ nomsRouter
         .catch(next)
     })
     .get((req, res, next) => {
-        res.json(serializeNom(res.article));
+        res.json(serializeNom(res.nom));
     })
     .delete((req, res, next) => {
         NomsService.deleteNom(

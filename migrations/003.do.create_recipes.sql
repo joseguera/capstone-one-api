@@ -7,8 +7,6 @@ CREATE TABLE recipes (
     date_published TIMESTAMPTZ DEFAULT now() NOT NULL,
     nom INTEGER
         REFERENCES noms(id) ON DELETE CASCADE NOT NULL,
-    list INTEGER
-        REFERENCES lists(id) ON DELETE CASCADE NOT NULL,
     author INTEGER
         REFERENCES users(id) ON DELETE CASCADE NOT NULL
 );
