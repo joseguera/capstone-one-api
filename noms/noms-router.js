@@ -12,7 +12,7 @@ const serializeNom = nom => ({
     sub: xss(nom.sub),
     url: xss(nom.url),
     description: xss(nom.description),
-    date_published: nom.date_published,
+    date_created: nom.date_created,
 });
 
 nomsRouter
