@@ -1,8 +1,19 @@
+const path = require('path');
 const express = require('express');
+const xss = require('xss');
 const NomsService = require('./noms-service');
 
 const nomsRouter = express.Router();
 const jsonParser = express.json();
+
+const serializeNom = nom => ({
+    id: nom.id,
+    nom_name: xss(nom.nom_name),
+    sub: xss(nom.sub),
+    url: xss(nom.url),
+    description: xss(nom.description),
+    date_published: nom.date_published,
+});
 
 nomsRouter
     .route('/')
@@ -18,6 +29,15 @@ nomsRouter
     .post(jsonParser, (req, res, next) => {
         const { nom_name, sub } = req.body;
         const newNom = { nom_name, sub };
+        
+        for (const [key, value] of Object.entries(newNom)) {
+            if (value == null) {
+                return res.status(400).json({
+                    error: { message: `Missing '${key}' in the request body` }
+                });
+            }
+        }
+        
         NomsService.insertNom(
             req.app.get('db'),
             newNom
@@ -25,7 +45,7 @@ nomsRouter
             .then(nom => {
                 res
                     .status(201)
-                    .location(`/noms/${nom.id}`)
+                    .location(path.posix.join(req.originalUrl, `/${nom.id}`))
                     .json(nom)
             })
             .catch(next)
@@ -33,17 +53,57 @@ nomsRouter
 
 nomsRouter
     .route('/:nom_id')
-    .get((req, res, next) => {
-        const knexInstance = req.app.get('db');
-        NomsService.getById(knexInstance, req.params.nom_id)
+    .all((req, res, next) => {
+        NomsService.getById(
+            req.app.get('db'),
+            req.params.nom_id
+        )
             .then(nom => {
-                if (!nom) {return res.status(404).json({
-                    error: { message: `Nom doesn't exist` }
+                if (!nom) {
+                    return res.status(404).json({
+                        error: { message: `Nom doesn't exist` }
                 })
             }
-            res.json(nom)
+            res.nom = nom
+            next()
         })
         .catch(next)
+    })
+    .get((req, res, next) => {
+        res.json(serializeNom(res.article));
+    })
+    .delete((req, res, next) => {
+        NomsService.deleteNom(
+            req.app.get('db'),
+            req.params.nom_id
+        )
+            .then(() => {
+                res.status(204).end()
+            })
+            .catch(next)
+    })
+    .patch(jsonParser, (req, res, next) => {
+        const { nom_name, sub, url, description } = req.body;
+        const nomToUpdate = { nom_name, sub, url, description };
+
+        const numberOfValues = Object.values(nomToUpdate).filter(Boolean).length
+        if (numberOfValues === 0) {
+            return res.status(400).json({
+                error: {
+                    message: `Request body must contain either 'nom_name', 'sub', 'url' or 'description'`
+                }
+            })
+        }
+
+        NomsService.updateNom(
+            req.app.get('db'),
+            req.params.nom_id,
+            nomToUpdate
+        )
+            .then(numRowsAffected => {
+                res.status(204).end()
+            })
+            .catch(next)
     })
 
 module.exports = nomsRouter;
