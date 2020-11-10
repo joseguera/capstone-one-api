@@ -12,7 +12,9 @@ const serializeNom = nom => ({
     sub: xss(nom.sub),
     url: xss(nom.url),
     description: xss(nom.description),
+    author: nom.author,
     date_created: nom.date_created,
+    updated_on: nom.updated_on
 });
 
 nomsRouter
@@ -27,8 +29,8 @@ nomsRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { nom_name, sub } = req.body;
-        const newNom = { nom_name, sub };
+        const { nom_name, sub, author } = req.body;
+        const newNom = { nom_name, sub, author };
         
         for (const [key, value] of Object.entries(newNom)) {
             if (value == null) {

@@ -12,7 +12,6 @@ const serializeRecipe = recipe => ({
     description: recipe.description,
     date_published: recipe.date_published,
     nom: recipe.nom,
-    list: recipe.list,
     author: recipe.author
 });
 
@@ -27,8 +26,8 @@ recipesRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { recipe_name, description, nom, list, author, date_published } = req.body;
-        const newRecipe = { recipe_name, description, nom, list, author };
+        const { recipe_name, description, nom, author, date_published } = req.body;
+        const newRecipe = { recipe_name, description, nom, author };
 
         for (const [key, value] of Object.entries(newRecipe))
             if (value == null)
