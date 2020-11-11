@@ -7,9 +7,6 @@ CREATE TABLE noms (
     url TEXT,
     description TEXT,
     recipe_id INTEGER
-        REFERENCES recipes(id) ON DELETE CASCADE NOT NULL,   
-    user_id INTEGER
-        REFERENCES nom_users(id) ON DELETE CASCADE NOT NULL,
-    date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
-    updated_on TIMESTAMPTZ DEFAULT now() NOT NULL
+        REFERENCES recipes(id) ON DELETE CASCADE,   
+    date_created TIMESTAMPTZ DEFAULT now() NOT NULL
 );
