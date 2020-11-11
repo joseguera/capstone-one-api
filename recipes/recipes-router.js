@@ -82,7 +82,7 @@ recipesRouter
             .catch(next)
     })
     .patch(jsonParser, (req, res, next) => {
-        const { recipe_name, description } = req.body;
+        const { recipe_name } = req.body;
         const recipeToUpdate = { recipe_name, description };
 
         const numberOfValues = Object.values(recipeToUpdate).filter(Boolean).length

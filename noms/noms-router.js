@@ -84,7 +84,7 @@ nomsRouter
             .catch(next)
     })
     .patch(jsonParser, (req, res, next) => {
-        const { nom_name, sub, recipe_id } = req.body;
+        const { nom_name, recipe_id } = req.body;
         const nomToUpdate = { nom_name, sub, url, description, recipe_id };
 
         const numberOfValues = Object.values(nomToUpdate).filter(Boolean).length
