@@ -13,9 +13,7 @@ const serializeNom = nom => ({
     url: xss(nom.url),
     description: xss(nom.description),
     recipe_id: nom.recipe_id,
-    user_id: nom.user_id,
     date_created: nom.date_created,
-    updated_on: nom.updated_on
 });
 
 nomsRouter
@@ -30,8 +28,8 @@ nomsRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { nom_name, sub, recipe_id, user_id } = req.body;
-        const newNom = { nom_name, sub, recipe_id, user_id };
+        const { nom_name, sub, url, description, recipe_id } = req.body;
+        const newNom = { nom_name, sub, url, description, recipe_id };
         
         for (const [key, value] of Object.entries(newNom)) {
             if (value == null) {
@@ -86,7 +84,7 @@ nomsRouter
             .catch(next)
     })
     .patch(jsonParser, (req, res, next) => {
-        const { nom_name, sub, url, description, recipe_id } = req.body;
+        const { nom_name, sub, recipe_id } = req.body;
         const nomToUpdate = { nom_name, sub, url, description, recipe_id };
 
         const numberOfValues = Object.values(nomToUpdate).filter(Boolean).length
