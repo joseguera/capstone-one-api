@@ -9,7 +9,7 @@ CREATE TABLE noms (
     recipe_id INTEGER
         REFERENCES recipes(id) ON DELETE CASCADE NOT NULL,   
     user_id INTEGER
-        REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+        REFERENCES nom_users(id) ON DELETE CASCADE NOT NULL,
     date_created TIMESTAMPTZ DEFAULT now() NOT NULL,
     updated_on TIMESTAMPTZ DEFAULT now() NOT NULL
 );

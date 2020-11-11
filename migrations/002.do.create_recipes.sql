@@ -6,6 +6,6 @@ CREATE TABLE recipes (
     description TEXT,
     date_published TIMESTAMPTZ DEFAULT now() NOT NULL,
     author INTEGER
-        REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+        REFERENCES nom_users(id) ON DELETE CASCADE NOT NULL,
     updated_on TIMESTAMPTZ DEFAULT now() NOT NULL    
 );

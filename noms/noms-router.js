@@ -12,7 +12,8 @@ const serializeNom = nom => ({
     sub: xss(nom.sub),
     url: xss(nom.url),
     description: xss(nom.description),
-    author: nom.author,
+    recipe_id: nom.recipe_id,
+    user_id: nom.user_id,
     date_created: nom.date_created,
     updated_on: nom.updated_on
 });
@@ -29,8 +30,8 @@ nomsRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { nom_name, sub, author } = req.body;
-        const newNom = { nom_name, sub, author };
+        const { nom_name, sub, recipe_id, user_id } = req.body;
+        const newNom = { nom_name, sub, recipe_id, user_id };
         
         for (const [key, value] of Object.entries(newNom)) {
             if (value == null) {
@@ -85,14 +86,14 @@ nomsRouter
             .catch(next)
     })
     .patch(jsonParser, (req, res, next) => {
-        const { nom_name, sub, url, description } = req.body;
-        const nomToUpdate = { nom_name, sub, url, description };
+        const { nom_name, sub, url, description, recipe_id } = req.body;
+        const nomToUpdate = { nom_name, sub, url, description, recipe_id };
 
         const numberOfValues = Object.values(nomToUpdate).filter(Boolean).length
         if (numberOfValues === 0) {
             return res.status(400).json({
                 error: {
-                    message: `Request body must contain either 'nom_name', 'sub', 'url' or 'description'`
+                    message: `Request body must contain either 'nom_name', 'sub', 'url', 'description', or 'recipe_id'`
                 }
             })
         }
