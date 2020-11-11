@@ -27,7 +27,7 @@ recipesRouter
     })
     .post(jsonParser, (req, res, next) => {
         const { recipe_name, description, author, date_published } = req.body;
-        const newRecipe = { recipe_name, description, author };
+        const newRecipe = { recipe_name, description };
 
         for (const [key, value] of Object.entries(newRecipe))
             if (value == null)
@@ -36,7 +36,7 @@ recipesRouter
                 })
         
         newRecipe.date_published = date_published;
-
+        newRecipe.author = author;
         RecipesService.insertRecipe(
             req.app.get('db'),
             newRecipe
