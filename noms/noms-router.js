@@ -2,6 +2,8 @@ const path = require('path');
 const express = require('express');
 const xss = require('xss');
 const NomsService = require('./noms-service');
+const { requireAuth } = require('../src/middleware/basic-auth')
+
 
 const nomsRouter = express.Router();
 const jsonParser = express.json();
@@ -12,8 +14,9 @@ const serializeNom = nom => ({
     sub: xss(nom.sub),
     url: xss(nom.url),
     description: xss(nom.description),
-    recipe_id: nom.recipe_id,
+    author: nom.author,
     date_created: nom.date_created,
+    style: nom.style
 });
 
 nomsRouter
@@ -27,7 +30,7 @@ nomsRouter
             })
             .catch(next)
     })
-    .post(jsonParser, (req, res, next) => {
+    .post(requireAuth, jsonParser, (req, res, next) => {
         // TODO: re-add recipe_id to req.body & newNom
         const { nom_name, sub, url, description } = req.body;
         const newNom = { nom_name, sub, url, description };
@@ -39,6 +42,8 @@ nomsRouter
                 });
             }
         }
+
+        newNom.author = author.id;
         
         NomsService.insertNom(
             req.app.get('db'),
@@ -55,6 +60,7 @@ nomsRouter
 
 nomsRouter
     .route('/:nom_id')
+    .all(requireAuth)
     .all((req, res, next) => {
         NomsService.getById(
             req.app.get('db'),
@@ -84,9 +90,9 @@ nomsRouter
             })
             .catch(next)
     })
-    .patch(jsonParser, (req, res, next) => {
-        const { nom_name, sub, url, description, recipe_id } = req.body;
-        const nomToUpdate = { nom_name, sub, url, description, recipe_id };
+    .patch(requireAuth, jsonParser, (req, res, next) => {
+        const { nom_name, sub, url, description, author, style } = req.body;
+        const nomToUpdate = { nom_name, sub, url, description, author, style };
 
         const numberOfValues = Object.values(nomToUpdate).filter(Boolean).length
         if (numberOfValues === 0) {

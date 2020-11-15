@@ -8,7 +8,6 @@ const validateBearerToken = require('./validate-bearer-token');
 const errorHandler = require('./error-handler');
 const nomsRouter = require('../noms/noms-router');
 const usersRouter = require('../users/users-router');
-const recipesRouter = require('../recipes/recipes-router');
 
 const app = express();
 
@@ -25,7 +24,6 @@ app.use(express.json());
 
 app.use('/api/noms', nomsRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/recipes', recipesRouter);
 
 app.use(errorHandler);
 
