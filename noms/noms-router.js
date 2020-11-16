@@ -43,7 +43,7 @@ nomsRouter
             }
         }
 
-        newNom.author = author.id;
+        newNom.author = req.user.id;
         
         NomsService.insertNom(
             req.app.get('db'),
@@ -91,8 +91,8 @@ nomsRouter
             .catch(next)
     })
     .patch(requireAuth, jsonParser, (req, res, next) => {
-        const { nom_name, sub, url, description, author, style } = req.body;
-        const nomToUpdate = { nom_name, sub, url, description, author, style };
+        const { nom_name, sub, url, description, style } = req.body;
+        const nomToUpdate = { nom_name, sub, url, description, style };
 
         const numberOfValues = Object.values(nomToUpdate).filter(Boolean).length
         if (numberOfValues === 0) {
@@ -102,6 +102,8 @@ nomsRouter
                 }
             })
         }
+
+        nomToUpdate.author = req.user.id;
 
         NomsService.updateNom(
             req.app.get('db'),

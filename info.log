@@ -391,3 +391,6 @@
 {"message":"Unauthorized request to path: /api/noms/","level":"error"}
 {"message":"Unauthorized request to path: /api/noms/","level":"error"}
 {"message":"Unauthorized request to path: /api/noms","level":"error"}
+{"message":"author is not defined","level":"error"}
+{"message":"nom_users is not defined","level":"error"}
+{"message":"newNom is not defined","level":"error"}
