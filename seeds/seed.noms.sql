@@ -1,6 +1,13 @@
+BEGIN;
+
+TRUNCATE
+  noms,
+  nom_users
+  RESTART IDENTITY CASCADE;
+
 INSERT INTO nom_users (fullname, username, password)
 VALUES
-    ('Chickie Chicano', 'chicks_mcgee', 'secret-secret');
+    ('Chickie Chicano', 'chicks_mcgee', '$2a$12$/aMz9hFcqMaoo97BbtuwsuRTXnVVL2GbbDbNdEeHH0kAXhauZgRJm');
 
 INSERT INTO noms (nom_name, sub, url, description, author)
 VALUES 
