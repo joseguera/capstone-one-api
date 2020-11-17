@@ -2,8 +2,7 @@ const path = require('path');
 const express = require('express');
 const xss = require('xss');
 const NomsService = require('./noms-service');
-const { requireAuth } = require('../src/middleware/basic-auth')
-
+const { requireAuth } = require('../src/middleware/jwt-auth')
 
 const nomsRouter = express.Router();
 const jsonParser = express.json();
