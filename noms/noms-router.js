@@ -32,8 +32,8 @@ nomsRouter
     })
     .post(requireAuth, jsonParser, (req, res, next) => {
         // TODO: re-add recipe_id to req.body & newNom
-        const { nom_name, sub, url, description } = req.body;
-        const newNom = { nom_name, sub, url, description };
+        const { nom_name, sub, url, description, style } = req.body;
+        const newNom = { nom_name, sub, url, description, style };
         
         for (const [key, value] of Object.entries(newNom)) {
             if (value == null) {

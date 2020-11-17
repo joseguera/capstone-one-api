@@ -394,3 +394,19 @@
 {"message":"author is not defined","level":"error"}
 {"message":"nom_users is not defined","level":"error"}
 {"message":"newNom is not defined","level":"error"}
+{"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
+{"message":"connect ECONNREFUSED 127.0.0.1:5432","level":"error"}
+{"message":"connect ECONNREFUSED 127.0.0.1:5432","level":"error"}
+{"message":"insert into \"noms\" (\"author\", \"description\", \"nom_name\", \"style\", \"sub\", \"url\") values ($1, $2, $3, $4, $5, $6) returning * - invalid input value for enum nom_category: \"bom\"","level":"error"}
+{"message":"insert into \"noms\" (\"author\", \"description\", \"nom_name\", \"style\", \"sub\", \"url\") values ($1, $2, $3, $4, $5, $6) returning * - invalid input value for enum nom_category: \"bon\"","level":"error"}
+{"message":"update \"noms\" set \"nom_name\" = $1, \"sub\" = $2, \"url\" = $3, \"description\" = $4, \"style\" = $5, \"author\" = $6 where \"id\" = $7 - invalid input value for enum nom_category: \"-- Select --\"","level":"error"}
+{"message":"update \"noms\" set \"nom_name\" = $1, \"sub\" = $2, \"url\" = $3, \"description\" = $4, \"style\" = $5, \"author\" = $6 where \"id\" = $7 - invalid input value for enum nom_category: \"\"","level":"error"}
+{"message":"update \"noms\" set \"nom_name\" = $1, \"sub\" = $2, \"url\" = $3, \"description\" = $4, \"style\" = $5, \"author\" = $6 where \"id\" = $7 - invalid input value for enum nom_category: \"-- Select --\"","level":"error"}
