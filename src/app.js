@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const errorHandler = require('./error-handler');
 const nomsRouter = require('../noms/noms-router');
+const authRouter = require('./auth/auth-router')
+
 
 const app = express();
 
@@ -20,6 +22,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/noms', nomsRouter);
+app.use('/api/auth', authRouter);
 
 app.use(errorHandler);
 

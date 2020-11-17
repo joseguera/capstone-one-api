@@ -21,7 +21,6 @@ const serializeNom = nom => ({
 
 nomsRouter
     .route('/')
-    .all(requireAuth)
     .get((req, res, next) => {
         NomsService.getAllNoms(
             req.app.get('db')
