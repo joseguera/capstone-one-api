@@ -7,7 +7,7 @@ TRUNCATE
 
 INSERT INTO nom_users (fullname, username, password)
 VALUES
-    ('Chickie Chicano', 'chicks_mcgee', '$2a$12$/aMz9hFcqMaoo97BbtuwsuRTXnVVL2GbbDbNdEeHH0kAXhauZgRJm');
+    ('Chickie Chicano', 'chicks_mcgee', 'secret');
 
 INSERT INTO noms (nom_name, sub, url, description, author)
 VALUES 

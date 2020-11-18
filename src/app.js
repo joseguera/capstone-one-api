@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config');
 const errorHandler = require('./error-handler');
 const nomsRouter = require('../noms/noms-router');
 const authRouter = require('./auth/auth-router')
+const usersRouter = require('./users/users-router')
 
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.json());
 
 app.use('/api/noms', nomsRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
 
 app.use(errorHandler);
 
