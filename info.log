@@ -415,3 +415,5 @@
 {"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
 {"message":"select * from \"noms\" where \"id\" = $1 limit $2 - invalid input syntax for type integer: \"undefined\"","level":"error"}
 {"message":"insert into \"noms\" (\"author\", \"description\", \"nom_name\", \"style\", \"sub\", \"url\") values ($1, $2, $3, $4, $5, $6) returning * - invalid input value for enum nom_category: \"-- Select --\"","level":"error"}
+{"message":"insert into \"noms\" (\"author\", \"description\", \"nom_name\", \"style\", \"sub\", \"url\") values ($1, $2, $3, $4, $5, $6) returning * - invalid input value for enum nom_category: \"-- Select --\"","level":"error"}
+{"message":"insert into \"noms\" (\"author\", \"description\", \"nom_name\", \"style\", \"sub\", \"url\") values ($1, $2, $3, $4, $5, $6) returning * - invalid input value for enum nom_category: \"-- Select --\"","level":"error"}
